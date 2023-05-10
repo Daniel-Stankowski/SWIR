@@ -1,0 +1,129 @@
+from pyfirmata import Arduino
+from time import *
+
+
+board = Arduino('/dev/ttyUSB1')
+board.digital[10].mode = 1
+board.digital[11].mode = 1
+
+def none():
+    for i in range(8):
+        board.digital[i+2].write(1)
+        
+def zero():
+    none()
+    board.digital[2].write(0)
+    board.digital[6].write(0)
+    board.digital[3].write(0)
+    board.digital[4].write(0)
+    board.digital[5].write(0)
+    board.digital[7].write(0)
+    
+def one():
+    none()
+    board.digital[3].write(0)
+    board.digital[4].write(0)  
+    
+def two():
+    none()
+    board.digital[2].write(0)
+    board.digital[3].write(0)
+    board.digital[8].write(0)
+    board.digital[6].write(0)
+    board.digital[5].write(0)
+    
+def three():
+    none()
+    board.digital[2].write(0)
+    board.digital[3].write(0)
+    board.digital[8].write(0)
+    board.digital[4].write(0)
+    board.digital[5].write(0)
+    
+def four():
+    none()
+    board.digital[7].write(0)
+    board.digital[8].write(0)
+    board.digital[3].write(0)
+    board.digital[4].write(0)
+    
+def five():
+    none()
+    board.digital[2].write(0)
+    board.digital[7].write(0)
+    board.digital[8].write(0)
+    board.digital[4].write(0)
+    board.digital[5].write(0)
+    
+def six():
+    none()
+    board.digital[2].write(0)
+    board.digital[6].write(0)
+    board.digital[8].write(0)
+    board.digital[4].write(0)
+    board.digital[5].write(0)
+    board.digital[7].write(0)
+    
+def seven():
+    none()
+    board.digital[2].write(0)
+    board.digital[3].write(0)
+    board.digital[4].write(0)
+    
+def eight():
+    none()
+    board.digital[2].write(0)
+    board.digital[6].write(0)
+    board.digital[8].write(0)
+    board.digital[4].write(0)
+    board.digital[5].write(0)
+    board.digital[7].write(0)
+    board.digital[3].write(0)
+    
+def nine():
+    none()
+    board.digital[2].write(0)
+    board.digital[3].write(0)
+    board.digital[8].write(0)
+    board.digital[4].write(0)
+    board.digital[5].write(0)
+    board.digital[7].write(0)
+
+def display(num):
+    if num == 0:
+        zero();
+    if num == 1:
+        one()
+    if num == 2:
+        two();
+    if num == 3:
+        three()
+    if num == 4:
+        four();
+    if num == 5:
+        five()
+    if num == 6:
+        six();
+    if num == 7:
+        seven()
+    if num == 8:
+        eight();
+    if num == 9:
+        nine()
+        
+def display_both(a,b):
+    board.digital[10].write(0)
+    display(b)
+    board.digital[11].write(1)
+    sleep(0.001)
+    board.digital[11].write(0)
+    display(a)
+    board.digital[10].write(1)
+
+while(True):
+    for i in range(10):
+        for j in range(10):
+            for k in range(20):
+                display_both(i,j)
+
+        
